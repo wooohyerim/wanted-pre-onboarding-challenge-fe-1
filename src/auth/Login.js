@@ -17,7 +17,7 @@ const Login = () => {
   const isValid =
     userId.includes("@") && userId.includes(".") && userPw.length >= 8;
 
-  const goTo = (e) => {
+  const goTodo = (e) => {
     // e.preventDefault();
     fetch("http://localhost:8080/users/login", {
       method: "POST",
@@ -30,7 +30,14 @@ const Login = () => {
       }),
     })
       .then((response) => response.json())
-      .then((res) => localStorage.setItem("token", res.token));
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("token", res.token);
+        } else {
+          alert("토큰이 유효하지 않습니다.");
+          navigate("/");
+        }
+      });
     navigate("/todo");
   };
 
@@ -49,7 +56,11 @@ const Login = () => {
           placeholder="password"
           onChange={handleInputPw}
         ></input>
-        <button type="button" onClick={goTo} disabled={isValid ? false : true}>
+        <button
+          type="button"
+          onClick={goTodo}
+          disabled={isValid ? false : true}
+        >
           제출
         </button>
       </Box>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const SignUp = () => {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
+  const navigate = useNavigate();
 
   const handleInputId = (e) => {
     setUserId(e.target.value);
@@ -15,7 +17,7 @@ const SignUp = () => {
   const isValid =
     userId.includes("@") && userId.includes(".") && userPw.length >= 8;
 
-  const goTo = (e) => {
+  const goToLogin = (e) => {
     // e.preventDefault();
     fetch("http://localhost:8080/users/create", {
       method: "POST",
@@ -29,6 +31,7 @@ const SignUp = () => {
     })
       .then((response) => response.json())
       .then((res) => console.log(res));
+    navigate("/login");
   };
 
   return (
@@ -46,7 +49,11 @@ const SignUp = () => {
           placeholder="password"
           onChange={handleInputPw}
         ></input>
-        <button type="button" onClick={goTo} disabled={isValid ? false : true}>
+        <button
+          type="button"
+          onClick={goToLogin}
+          disabled={isValid ? false : true}
+        >
           제출
         </button>
       </Box>
