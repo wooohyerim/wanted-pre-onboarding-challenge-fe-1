@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Login = () => {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
+  const navigate = useNavigate();
 
   const handleInputId = (e) => {
     setUserId(e.target.value);
@@ -29,8 +31,8 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((res) => localStorage.setItem("token", res.token));
+    navigate("/todo");
   };
-  console.log();
 
   return (
     <div>
