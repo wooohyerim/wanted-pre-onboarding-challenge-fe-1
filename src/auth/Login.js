@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Login = () => {
@@ -14,8 +14,7 @@ const Login = () => {
     setUserPw(e.target.value);
   };
 
-  const isValid =
-    userId.includes("@") && userId.includes(".") && userPw.length >= 8;
+  const isValid = userId.includes("@" && ".") && userPw.length >= 8;
 
   const goTodo = (e) => {
     // e.preventDefault();
@@ -34,7 +33,7 @@ const Login = () => {
         if (res.token) {
           localStorage.setItem("token", res.token);
         } else {
-          alert("토큰이 유효하지 않습니다.");
+          alert("정보가 유효하지 않습니다.");
           navigate("/");
         }
       });
@@ -42,29 +41,32 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Box>
-        <input
-          type="text"
-          name="userId"
-          placeholder="email"
-          onChange={handleInputId}
-        ></input>
-        <input
-          type="password"
-          name="userPw"
-          placeholder="password"
-          onChange={handleInputPw}
-        ></input>
-        <button
-          type="button"
-          onClick={goTodo}
-          disabled={isValid ? false : true}
-        >
-          제출
-        </button>
-      </Box>
-    </div>
+    <>
+      <Title>LOGIN</Title>
+      <div>
+        <Box>
+          <input
+            type="text"
+            name="userId"
+            placeholder="email"
+            onChange={handleInputId}
+          ></input>
+          <input
+            type="password"
+            name="userPw"
+            placeholder="password"
+            onChange={handleInputPw}
+          ></input>
+          <button
+            type="button"
+            onClick={goTodo}
+            disabled={isValid ? false : true}
+          >
+            제출
+          </button>
+        </Box>
+      </div>
+    </>
   );
 };
 
@@ -77,4 +79,8 @@ const Box = styled.form`
   width: 200px;
   height: 100px;
   margin: 50px auto;
+`;
+
+const Title = styled.h1`
+  text-align: center;
 `;

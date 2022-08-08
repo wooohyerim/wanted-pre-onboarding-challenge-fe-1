@@ -14,8 +14,7 @@ const SignUp = () => {
     setUserPw(e.target.value);
   };
 
-  const isValid =
-    userId.includes("@") && userId.includes(".") && userPw.length >= 8;
+  const isValid = userId.includes("@" && ".") && userPw.length >= 8;
 
   const goToLogin = (e) => {
     // e.preventDefault();
@@ -35,29 +34,32 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <Box>
-        <input
-          type="text"
-          name="userId"
-          placeholder="email"
-          onChange={handleInputId}
-        ></input>
-        <input
-          type="password"
-          name="userPw"
-          placeholder="password"
-          onChange={handleInputPw}
-        ></input>
-        <button
-          type="button"
-          onClick={goToLogin}
-          disabled={isValid ? false : true}
-        >
-          제출
-        </button>
-      </Box>
-    </div>
+    <>
+      <Title>JOIN</Title>
+      <div>
+        <Box>
+          <input
+            type="text"
+            name="userId"
+            placeholder="email"
+            onChange={handleInputId}
+          ></input>
+          <input
+            type="password"
+            name="userPw"
+            placeholder="password"
+            onChange={handleInputPw}
+          ></input>
+          <button
+            type="button"
+            onClick={goToLogin}
+            disabled={isValid ? false : true}
+          >
+            제출
+          </button>
+        </Box>
+      </div>
+    </>
   );
 };
 
@@ -70,4 +72,8 @@ const Box = styled.form`
   width: 200px;
   height: 100px;
   margin: 50px auto;
+`;
+
+const Title = styled.h1`
+  text-align: center;
 `;
