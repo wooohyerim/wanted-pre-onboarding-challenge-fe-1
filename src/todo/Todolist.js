@@ -5,24 +5,32 @@ const Todolist = ({ todo, todoList, setTodoList }) => {
   const { title, content } = todo;
 
   const deleteTodo = () => {
-    let del = [...todoList];
-    del.splice(todo.id, 1);
-    setTodoList(del);
+    fetch(`http://localhost:8080/todos/${todo.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res));
   };
+
+  // useEffect(() => {
   //   fetch("http://localhost:8080/todos/:id", {
   //     method: "DELETE",
   //     headers: { Authorization: localStorage.getItem("token") },
   //   })
   //     .then((res) => res.json())
-  //     .then((res) => setTodoList(res.filter((el) => el.id !== todoList.id)));
-  // };
+  //     .then((res) => setTodoList(res.data));
+  // }, []);
 
   return (
     <div>
       <ListBox>
         <InnerBox>
           <InnerText>
-            <p>{title}</p>
+            <h4>{title}</h4>
             <p>{content}</p>
           </InnerText>
         </InnerBox>
