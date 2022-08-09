@@ -32,12 +32,12 @@ const Login = () => {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("token", res.token);
+          navigate("/todo");
         } else {
           alert("정보가 유효하지 않습니다.");
           navigate("/");
         }
       });
-    navigate("/todo");
   };
 
   return (
