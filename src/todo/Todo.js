@@ -41,38 +41,40 @@ const Todo = () => {
   };
 
   return (
-    <TodoBox>
-      <Title>TODO LIST</Title>
-      <form>
-        <input
-          type="text"
-          placeholder="제목"
-          name="title"
-          onChange={onChangeTitle}
-        ></input>
-        <input
-          type="text"
-          placeholder="내용"
-          name="content"
-          onChange={onChangeContent}
-        ></input>
-        <button type="button" onClick={goToPost}>
-          추가
-        </button>
-      </form>
-      <InnerBox>
-        {todoList.map((todo) => {
-          return (
-            <Todolist
-              todo={todo}
-              key={todo.id}
-              todoList={todoList}
-              setTodoList={setTodoList}
-            />
-          );
-        })}
-      </InnerBox>
-    </TodoBox>
+    <>
+      <TodoBox>
+        <Title>TODO LIST</Title>
+        <TodoForm>
+          <input
+            type="text"
+            placeholder="제목"
+            name="title"
+            onChange={onChangeTitle}
+          />
+          <input
+            type="text"
+            placeholder="내용"
+            name="content"
+            onChange={onChangeContent}
+          />
+          <button type="button" onClick={goToPost}>
+            추가
+          </button>
+        </TodoForm>
+        <InnerBox>
+          {todoList.map((todo) => {
+            return (
+              <Todolist
+                todo={todo}
+                key={todo.id}
+                todoList={todoList}
+                setTodoList={setTodoList}
+              />
+            );
+          })}
+        </InnerBox>
+      </TodoBox>
+    </>
   );
 };
 
@@ -82,9 +84,14 @@ const TodoBox = styled.div`
   width: 400px;
   height: auto;
   margin-top: 50px;
+  margin-left: 20%;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-sizing: border-box;
+`;
+
+const TodoForm = styled.form`
+  margin-left: 30px;
 `;
 
 const Title = styled.h3`
